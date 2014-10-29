@@ -4,15 +4,20 @@
 #include <SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
 #include <iostream>
+#include <list>
+
+using namespace std;
 
 class Personaje
 {
     public:
         SDL_Rect rectangulo;
-        SDL_Texture* textura;
-        Personaje(int x, int y,SDL_Renderer* renderer);
-        void logic(Uint8* teclas_presionadas);
-        void render(SDL_Renderer* renderer);
+        list<SDL_Texture*> texturas;
+        list<SDL_Texture*>::iterator textura_actual;
+        int frame;
+        Personaje();
+        virtual void logic(Uint8* teclas_presionadas);
+        virtual void render(SDL_Renderer* renderer);
         virtual ~Personaje();
     protected:
     private:

@@ -557,17 +557,32 @@
 	<SDL2/SDL_image.h>
 	<iostream>
 
-1414181195 source:/home/turupawn/Projects/Codeblocks/Clases/Progra3/RPG/main.cpp
+1414605892 source:/home/turupawn/Projects/Codeblocks/Clases/Progra3/RPG/main.cpp
 	<SDL2/SDL.h>
 	<SDL2/SDL_image.h>
 	<iostream>
+	<list>
+	"PersonajeJugador.h"
+	"NPC.h"
+
+1414606976 /home/turupawn/Projects/Codeblocks/Clases/Progra3/RPG/Personaje.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_image.h>
+	<iostream>
+	<list>
+
+1414605426 source:/home/turupawn/Projects/Codeblocks/Clases/Progra3/RPG/Personaje.cpp
 	"Personaje.h"
 
-1414181187 /home/turupawn/Projects/Codeblocks/Clases/Progra3/RPG/Personaje.h
-	<SDL2/SDL.h>
-	<SDL2/SDL_image.h>
-	<iostream>
+1414518882 /home/turupawn/Projects/Codeblocks/Clases/Progra3/RPG/PersonajeJugador.h
+	"Personaje.h"
 
-1414180576 source:/home/turupawn/Projects/Codeblocks/Clases/Progra3/RPG/Personaje.cpp
+1414606381 source:/home/turupawn/Projects/Codeblocks/Clases/Progra3/RPG/PersonajeJugador.cpp
+	"PersonajeJugador.h"
+
+1414605560 source:/home/turupawn/Projects/Codeblocks/Clases/Progra3/RPG/NPC.cpp
+	"NPC.h"
+
+1414519085 /home/turupawn/Projects/Codeblocks/Clases/Progra3/RPG/NPC.h
 	"Personaje.h"
 

@@ -1,11 +1,8 @@
 #include "Personaje.h"
 
-Personaje::Personaje(int x, int y,SDL_Renderer* renderer)
+Personaje::Personaje()
 {
-    this->rectangulo.x = x;
-    this->rectangulo.y = y;
-    textura = IMG_LoadTexture(renderer, "assets/personaje/down.png");
-    SDL_QueryTexture(textura, NULL, NULL, &this->rectangulo.w, &this->rectangulo.h);
+    frame=0;
 }
 
 Personaje::~Personaje()
@@ -15,25 +12,15 @@ Personaje::~Personaje()
 
 void Personaje::logic(Uint8* teclas_presionadas)
 {
-    if( teclas_presionadas[ SDL_SCANCODE_UP ] )
-    {
-        rectangulo.y-=1;
-    }
-    if( teclas_presionadas[ SDL_SCANCODE_DOWN ] )
-    {
-        rectangulo.y+=1;
-    }
-    if( teclas_presionadas[ SDL_SCANCODE_RIGHT ] )
-    {
-        rectangulo.x+=1;
-    }
-    if( teclas_presionadas[ SDL_SCANCODE_LEFT ] )
-    {
-        rectangulo.x-=1;
-    }
+    std::cout<<"Test"<<std::endl;
 }
 
 void Personaje::render(SDL_Renderer* renderer)
 {
-    SDL_RenderCopy(renderer, textura, NULL, &rectangulo);
+    SDL_RenderCopy(renderer, *textura_actual, NULL, &rectangulo);
+    if(frame%25==0)
+        textura_actual++;
+    if(textura_actual==texturas.end())
+        textura_actual=texturas.begin();
+    frame++;
 }

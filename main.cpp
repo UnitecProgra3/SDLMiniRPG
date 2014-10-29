@@ -2,15 +2,17 @@
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
 #include<iostream>
-#include "Personaje.h"
+#include<list>
+#include "PersonajeJugador.h"
+#include "NPC.h"
+
+using namespace std;
 
 SDL_Window* window;
 SDL_Renderer* renderer;
 SDL_Event Event;
 SDL_Texture *background,*character;
 SDL_Rect rect_background,rect_character;
-
-
 
 int main( int argc, char* args[] )
 {
@@ -45,7 +47,10 @@ int main( int argc, char* args[] )
     rect_character.w = w;
     rect_character.h = h;
 
-    Personaje personaje(0,0,renderer);
+
+    list<Personaje*>personajes;
+    personajes.push_back(new PersonajeJugador (0,0,renderer));
+
     //Main Loop
     while(true)
     {
@@ -57,10 +62,18 @@ int main( int argc, char* args[] )
             }
         }
 
-        personaje.logic((Uint8*)SDL_GetKeyboardState( NULL ));
+        for(list<Personaje*>::iterator i = personajes.begin();
+                i!=personajes.end();
+                i++)
+            (*i)->logic((Uint8*)SDL_GetKeyboardState( NULL ));
 
         SDL_RenderCopy(renderer, background, NULL, &rect_background);
-        personaje.render(renderer);
+
+        for(list<Personaje*>::iterator i = personajes.begin();
+                i!=personajes.end();
+                i++)
+            (*i)->render(renderer);
+
         SDL_RenderPresent(renderer);
 
         SDL_Delay(16.66);
