@@ -1,9 +1,13 @@
 #include "PersonajeJugador.h"
 
-PersonajeJugador::PersonajeJugador(int x, int y,SDL_Renderer* renderer)
+PersonajeJugador::PersonajeJugador(int x, int y,
+                                    SDL_Renderer* renderer,
+                                    list<Personaje*>*personajes)
 {
     this->rectangulo.x = x;
     this->rectangulo.y = y;
+    this->personajes=personajes;
+
     SDL_Texture *textura = IMG_LoadTexture(renderer, "assets/personaje/down1.png");
     SDL_QueryTexture(textura, NULL, NULL, &this->rectangulo.w, &this->rectangulo.h);
     texturas.push_back(textura);
@@ -20,6 +24,8 @@ PersonajeJugador::~PersonajeJugador()
 
 void PersonajeJugador::logic(Uint8* teclas_presionadas)
 {
+    SDL_Rect temp = this->rectangulo;
+
     if( teclas_presionadas[ SDL_SCANCODE_UP ] )
     {
         rectangulo.y-=1;
@@ -36,4 +42,20 @@ void PersonajeJugador::logic(Uint8* teclas_presionadas)
     {
         rectangulo.x-=1;
     }
+
+    for(list<Personaje*>::iterator i = personajes->begin();
+            i!=personajes->end();
+            i++)
+    {
+        if(this==(*i))
+            continue;
+        if(colision(this->rectangulo, (*i)->rectangulo))
+            rectangulo=temp;
+    }
 }
+
+
+
+
+
+

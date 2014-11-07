@@ -49,7 +49,12 @@ int main( int argc, char* args[] )
 
 
     list<Personaje*>personajes;
-    personajes.push_back(new PersonajeJugador (0,0,renderer));
+    personajes.push_back(new PersonajeJugador (0,0,renderer,&personajes));
+    personajes.push_back(new NPC (50,50,renderer,&personajes));
+    personajes.push_back(new NPC (100,200,renderer,&personajes));
+    personajes.push_back(new NPC (100,300,renderer,&personajes));
+    personajes.push_back(new NPC (150,50,renderer,&personajes));
+    personajes.push_back(new NPC (50,150,renderer,&personajes));
 
     //Main Loop
     while(true)

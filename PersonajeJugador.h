@@ -6,7 +6,9 @@
 class PersonajeJugador : public Personaje
 {
     public:
-        PersonajeJugador(int x, int y,SDL_Renderer* renderer);
+        PersonajeJugador(int x, int y,
+                          SDL_Renderer* renderer,
+                          list<Personaje*>*personajes);
         void logic(Uint8* teclas_presionadas);
         virtual ~PersonajeJugador();
     protected:
