@@ -27,7 +27,7 @@ void NPC::logic(Uint8* teclas_presionadas)
     SDL_Rect temp = this->rectangulo;
 
     rectangulo.x++;
-    if(rectangulo.x>100)
+    if(rectangulo.x>1000)
         rectangulo.x=0;
 
     for(list<Personaje*>::iterator i = personajes->begin();

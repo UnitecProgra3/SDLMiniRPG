@@ -5,6 +5,7 @@
 #include<list>
 #include "PersonajeJugador.h"
 #include "NPC.h"
+#include <stdlib.h>     /* srand, rand */
 
 using namespace std;
 
@@ -57,8 +58,12 @@ int main( int argc, char* args[] )
     personajes.push_back(new NPC (50,150,renderer,&personajes));
 
     //Main Loop
+    int frame=0;
     while(true)
     {
+        frame++;
+        if(frame%100==0)
+            personajes.push_back(new NPC (100,rand() % 100,renderer,&personajes));
         while(SDL_PollEvent(&Event))
         {
             if(Event.type == SDL_QUIT)

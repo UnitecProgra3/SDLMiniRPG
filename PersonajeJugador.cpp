@@ -73,7 +73,11 @@ void PersonajeJugador::logic(Uint8* teclas_presionadas)
         if(this==(*i))
             continue;
         if(colision(this->rectangulo, (*i)->rectangulo))
-            rectangulo=temp;
+        {
+            //rectangulo=temp;
+            personajes->erase(i);
+            break;
+        }
     }
 }
 
