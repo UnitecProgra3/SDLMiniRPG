@@ -11,7 +11,11 @@ class Personaje
 {
     public:
         SDL_Rect rectangulo;
-        list<SDL_Texture*> texturas;
+        list<SDL_Texture*> texturas_up;
+        list<SDL_Texture*> texturas_down;
+        list<SDL_Texture*> texturas_left;
+        list<SDL_Texture*> texturas_right;
+        string orientacion;
         list<SDL_Texture*>::iterator textura_actual;
         list<Personaje*>*personajes;
         int frame;

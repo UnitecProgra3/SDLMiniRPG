@@ -9,10 +9,12 @@ NPC::NPC(int x, int y,SDL_Renderer* renderer,
     SDL_Texture *textura = IMG_LoadTexture(renderer, "assets/npcs/npc1/down1.png");
     SDL_QueryTexture(textura, NULL, NULL, &this->rectangulo.w, &this->rectangulo.h);
 
-    texturas.push_back(textura);
-    texturas.push_back(IMG_LoadTexture(renderer, "assets/npcs/npc1/down2.png"));
+    texturas_down.push_back(textura);
+    texturas_down.push_back(IMG_LoadTexture(renderer, "assets/npcs/npc1/down2.png"));
 
-    textura_actual=texturas.begin();
+    textura_actual=texturas_down.begin();
+
+    orientacion="down";
 }
 
 NPC::~NPC()
