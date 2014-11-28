@@ -26,6 +26,15 @@ PersonajeJugador::PersonajeJugador(int x, int y,
     orientacion="down";
 
     textura_actual=texturas_down.begin();
+
+    rayo_texture = IMG_LoadTexture(renderer,"assets/rayo.png");
+    SDL_QueryTexture(rayo_texture, NULL, NULL,
+                        &this->rayo_rect.w,
+                        &this->rayo_rect.h);
+    rayo_activado=false;
+
+    rayo_cooldown = 100;
+    rayo_frame_actual = 0;
 }
 
 PersonajeJugador::~PersonajeJugador()
@@ -36,6 +45,36 @@ PersonajeJugador::~PersonajeJugador()
 void PersonajeJugador::logic(Uint8* teclas_presionadas)
 {
     SDL_Rect temp = this->rectangulo;
+
+    if(rayo_activado)
+        rayo_frame_actual++;
+    if(rayo_frame_actual>=rayo_cooldown)
+        rayo_activado=false;
+
+    if(teclas_presionadas[SDL_SCANCODE_SPACE] && !rayo_activado)
+    {
+        rayo_activado=true;
+        rayo_frame_actual=0;
+        rayo_rect.x = rectangulo.x;
+        rayo_rect.y = rectangulo.y;
+        if(orientacion=="right")
+        {
+            rayo_rect.x+=rectangulo.w;
+        }
+        if(orientacion=="left")
+        {
+            rayo_rect.x-=rectangulo.w;
+        }
+        if(orientacion=="up")
+        {
+            rayo_rect.y-=rectangulo.h;
+        }
+        if(orientacion=="down")
+        {
+            rayo_rect.y+=rectangulo.h;
+        }
+        rayo_orientacion=orientacion;
+    }
 
     if( teclas_presionadas[ SDL_SCANCODE_UP ] )
     {
@@ -72,16 +111,44 @@ void PersonajeJugador::logic(Uint8* teclas_presionadas)
     {
         if(this==(*i))
             continue;
-        if(colision(this->rectangulo, (*i)->rectangulo))
+        if(colision(this->rayo_rect, (*i)->rectangulo))
         {
             //rectangulo=temp;
             personajes->erase(i);
+            rayo_activado=false;
             break;
+        }
+    }
+
+    if(rayo_activado)
+    {
+        if(orientacion=="up")
+        {
+            rayo_rect.y-=2;
+        }
+        if(orientacion=="down")
+        {
+            rayo_rect.y+=2;
+        }
+        if(orientacion=="left")
+        {
+            rayo_rect.x-=2;
+        }
+        if(orientacion=="right")
+        {
+            rayo_rect.x+=2;
         }
     }
 }
 
-
+void PersonajeJugador::render(SDL_Renderer* renderer)
+{
+    Personaje::render(renderer);
+    if(rayo_activado)
+    {
+        SDL_RenderCopy(renderer,rayo_texture, NULL,&rayo_rect);
+    }
+}
 
 
 
